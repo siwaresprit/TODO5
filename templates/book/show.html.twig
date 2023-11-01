@@ -1,0 +1,69 @@
+
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        border: 1px solid #ddd; /* Add border to table cells */
+        padding: 8px;
+        text-align: left;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2; /* Add alternate row background color */
+    }
+</style>
+ <form method="get" action="{{ path('showbyau') }}">
+        <input type="text" name="search" placeholder="Search for books">
+        <button type="submit">Search</button>
+    </form>
+<table>
+    <thead>
+        <tr>
+            <th>title</th>
+            <th>Date publication</th>
+            <th>published</th>
+            <th>category</th>
+            <th>author</th>
+            <th>actions</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for books in b %}
+            <tr>
+                <td>{{ books.title }}</td>
+                <td>{{ books.publicationDate|date('Y-m-d')  }}</td>
+                 <td>{{ books.published ? 'Oui' : 'Non' }}</td>
+                 <td>{{ books.category }}</td>
+                 <td>{{ books.author.username}}</td>
+
+                <td>
+                <form method="post" action="{{ path('edit_book', {'id': books.id}) }}">
+                        <button type="submit">Edit</button>
+                    </form>
+                    
+                    </td>
+                     <td>
+                <form method="post" action="{{ path('showd_book', {'id': books.id}) }}">
+                        <button type="submit">Show</button>
+                    </form>
+                    
+                    </td>
+                     <td>
+                <form method="post" action="{{ path('delete_book', {'id': books.id}) }}">
+                        <button type="submit">Delete</button>
+                    </form>
+                    
+                    </td>
+            </tr>
+
+        {% endfor %}
+    </tbody>
+</table>
+ 
+
+

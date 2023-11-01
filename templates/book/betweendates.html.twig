@@ -1,0 +1,30 @@
+{# templates/book/books_published_between_dates.html.twig #}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Books Published Between Dates</title>
+</head>
+<body>
+    <h1>Books Published Between 2014-01-01 and 2018-12-31</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Publication Date</th>
+                <th>Author</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+                <tr>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.publicationDate|date('Y-m-d') }}</td>
+                    <td>{{ book.author.username }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

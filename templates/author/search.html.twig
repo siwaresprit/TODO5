@@ -1,0 +1,45 @@
+
+
+{% block title %}Search Authors by Book Count{% endblock %}
+
+{% block body %}
+    <h1>Search Authors by Book Count</h1>
+
+    {# Search Form #}
+    <form method="get" action="{{ path('search') }}">
+        <div class="form-group">
+            <label for="min_books">Minimum Books:</label>
+            <input type="number" name="min_books" id="min_books" value="{{ minBooks }}">
+        </div>
+        <div class="form-group">
+            <label for="max_books">Maximum Books:</label>
+            <input type="number" name="max_books" id="max_books" value="{{ maxBooks }}">
+        </div>
+        <button type="submit">Search</button>
+    </form>
+
+    {# Search Results #}
+    <h2>Search Results</h2>
+    {% if authors is empty %}
+        <p>No authors found within the specified book count range.</p>
+    {% else %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Author Name</th>
+                    <th>Number of Books</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for author in authors %}
+                    <tr>
+                        <td>{{ author.username }}</td>
+                        <td>{{ author.nbBooks }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}
+</body>
+</html>

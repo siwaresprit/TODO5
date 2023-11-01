@@ -1,0 +1,30 @@
+{# templates/book/books_published_before_2023_and_author_more_than_10.html.twig #}
+
+<h1>Books Published Before 2023 with Authors Having More Than 10 Books</h1>
+
+{% if books is empty %}
+    <p>No books found.</p>
+{% else %}
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Publication Date</th>
+                <th>Category</th>
+                <th>Published</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+                <tr>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.author.username }}</td>
+                    <td>{{ book.publicationDate|date('Y-m-d') }}</td>
+                    <td>{{ book.category }}</td>
+                    <td>{{ book.published ? 'Yes' : 'No' }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
